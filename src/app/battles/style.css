@@ -1,0 +1,9 @@
+/* ...existing code... */
+#leftPanel::-webkit-scrollbar {
+    width: 8px;
+}
+#leftPanel::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 4px;
+}
+/* ...existing code... */
