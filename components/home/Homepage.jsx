@@ -80,7 +80,7 @@ const HomePage = () => {
 
                 </div>
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-white px-6 py-12">
+            <div className="hidden md:flex w-2/3 min-h-screen flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-white px-10 text-center">
                 <img alt="SampleApp Bro logo face with black hair, white gaming goggles with red cross and buttons, and black mask with red outline" className="w-48 h-48 object-contain mb-8" height="200" src="https://storage.googleapis.com/a1aa/image/766221ee-1504-4d81-6c23-360587cb2b1f.jpg" width="200" />
                 <h1 className="text-2xl font-normal text-gray-900 mb-24 text-center max-w-md">
                     Sample App -
