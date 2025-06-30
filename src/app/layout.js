@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
+import PageContainer from "../../components/common/PageContainer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +21,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body>
+        <PageContainer>{children}</PageContainer>
       </body>
     </html>
   );
