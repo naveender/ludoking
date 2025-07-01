@@ -1,4 +1,5 @@
 "use client";
+import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import Footer from "../footer/footer";
 import LeftSideLayout from "../common/LeftSideLayout";
@@ -7,9 +8,37 @@ import RightSideLayout from "../common/RightSideLayout";
 const LoginRegisterPage = () => {
   const router = useRouter();
 
+  const [mobile, setMobile] = useState('');
+  const [otp, setOtp] = useState('');
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const sendOTP = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const res = await fetch('/api/auth/send-otp', {
+      method: 'POST',
+      body: JSON.stringify({ mobile }),
+    });
+    setLoading(false);
+    if (res.ok) setStep(2);
+  };
+
+  const verifyOTP = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const res = await fetch('/api/auth/verify-otp', {
+      method: 'POST',
+      body: JSON.stringify({ mobile, otp }),
+    });
+    setLoading(false);
+    if (res.ok) router.push('/battles');
+  };
+
   const handleGoBack = () => {
     router.push("/");
   };
+
 
   return (
     <>
@@ -39,7 +68,7 @@ const LoginRegisterPage = () => {
           <h2 className="text-white font-bold text-lg mb-8">
             Sign in or Sign up
           </h2>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={step === 1 ? sendOTP : verifyOTP}>
             <div className="flex border border-gray-300 rounded overflow-hidden bg-white">
               <span className="bg-gray-200 text-gray-600 px-4 flex items-center select-none">
                 +91
@@ -49,13 +78,29 @@ const LoginRegisterPage = () => {
                 className="flex-grow px-4 py-2 outline-none text-black"
                 placeholder="Mobile number"
                 type="tel"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                disabled={step === 2}
               />
             </div>
+            {step === 2 && (
+              <input
+                className="border p-2 block w-full"
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                autoFocus
+              />
+            )}
             <button
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded"
               type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded"
+              disabled={loading || (step === 1 && !mobile) || (step === 2 && (!mobile || !otp))}
             >
-              CONTINUE
+              {loading
+                ? (step === 1 ? 'Sending OTP...' : 'Verifying...')
+                : (step === 1 ? 'Send OTP' : 'Verify OTP')}
             </button>
           </form>
         </div>

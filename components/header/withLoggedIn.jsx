@@ -6,7 +6,14 @@ import { useRouter } from "next/navigation";
 const WithLoggedInHeader = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const router = useRouter();
+   
 
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', {
+      method: 'POST',
+    });
+    router.push('/login-register'); // Redirect to login
+  };
     return (
         <>
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white sticky top-0 z-20">
@@ -67,7 +74,16 @@ const WithLoggedInHeader = () => {
                         <Link href="/profile" className="mb-2 font-semibold text-gray-700 block" onClick={() => setSidebarOpen(false)}>Profile</Link>
                         <Link href="/my-wallet" className="mb-2 font-semibold text-gray-700 block" onClick={() => setSidebarOpen(false)}>My Wallet</Link>
                         <Link href="/games-history" className="mb-2 font-semibold text-gray-700 block" onClick={() => setSidebarOpen(false)}>Games History</Link>
-                        <Link href="/logout" className="mb-2 font-semibold text-gray-700 block" onClick={() => setSidebarOpen(false)}>Logout</Link>
+                        <button
+        className="mb-2 font-semibold text-gray-700 block text-left w-full"
+        onClick={async () => {
+            setSidebarOpen(false);
+            await handleLogout();
+        }}
+        type="button"
+    >
+        Logout
+    </button>
                     </div>
                 </div>
             </div>

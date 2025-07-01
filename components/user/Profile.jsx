@@ -4,9 +4,10 @@ import LeftSideLayout from "../common/LeftSideLayout";
 import RightSideLayout from "../common/RightSideLayout";
 
 const Profile = () => {
+ 
   return (
     <>
-      <LeftSideLayout>
+      <LeftSideLayout >
         <div className="p-4 flex flex-col items-center space-y-4">
           <img
             alt="Profile avatar with black hair and white gaming glasses"
