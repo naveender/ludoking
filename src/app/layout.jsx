@@ -1,17 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
 import PageContainer from "../components/common/PageContainer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { ToastProvider } from "@/components/common/Toast/ToastProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -22,7 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <PageContainer>{children}</PageContainer>
+        <ToastProvider>
+          <PageContainer>{children}</PageContainer>
+        </ToastProvider>
       </body>
     </html>
   );

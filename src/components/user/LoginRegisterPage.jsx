@@ -11,6 +11,8 @@ import { SuccessCode, SuccessCreationCode } from "@/constants/apiStatus";
 import MobileInput from "../common/MobileInput";
 import Input from "../common/Input";
 import useUserStore from "@/store/userStore";
+import { useToast } from "../common/Toast/ToastProvider";
+import { OTPVerified } from "@/constants/successMessage";
 
 const mobileSchema = Yup.object().shape({
   mobile: Yup.string()
@@ -31,6 +33,7 @@ const LoginRegisterPage = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const showToast = useToast();
 
   const handleGoBack = () => {
     router.push("/");
@@ -42,11 +45,15 @@ const LoginRegisterPage = () => {
       let response = await generateOTP({ phoneNumber: values.mobile });
       if (response.status === SuccessCreationCode) {
         setStep(2);
-        // notify.success("OTP Sent", `OTP sent to ${values.mobile}`);
+        // Show toast notification on OTP sent
+        showToast(`OTP sent to ${values.mobile}`, "success");
       } else {
+        showToast("Unable to send OTP. Try again.", "error");
         setFieldError("mobile", "Unable to send OTP. Try again.");
       }
     } catch {
+      showToast("Unable to send OTP. Try again.", "error");
+
       setFieldError("mobile", "Unable to send OTP. Try again.");
     }
     setLoading(false);
@@ -61,9 +68,9 @@ const LoginRegisterPage = () => {
     };
     let response = await verifyOTP(requestBody);
     if (response.status == SuccessCode) {
+      showToast(OTPVerified, "success");
       useUserStore.getState().setUser(response.token);
       router.push("/");
-      // notify.success("OTP Verified", OTPVerified);
     }
     setLoading(false);
     setSubmitting(false);
@@ -133,9 +140,9 @@ const LoginRegisterPage = () => {
             )}
           </Formik>
         </div>
-        <Footer />
       </LeftSideLayout>
       <RightSideLayout></RightSideLayout>
+      <Footer />
     </>
   );
 };
