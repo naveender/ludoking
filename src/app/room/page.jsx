@@ -1,5 +1,4 @@
-
-import Room from "../../../components/game/Room";
+import Room from "../../components/game/Room";
 
 const RoomPage = () => {
   return <Room />;

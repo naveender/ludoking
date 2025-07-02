@@ -1,4 +1,4 @@
-import GameHistory from "../../../components/game/GameHistory";
+import GameHistory from "../../components/game/GameHistory";
 
 const GameHistoryPage = () => {
   return <GameHistory />;

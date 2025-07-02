@@ -1,4 +1,4 @@
-import Battles from "../../../components/battles/Battles";
+import Battles from "../../components/battles/Battles";
 
 const BattlesPage = () => {
   return <Battles />;

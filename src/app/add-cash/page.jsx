@@ -1,4 +1,4 @@
-import AddCash from "../../../components/wallet/AddCash";
+import AddCash from "../../components/wallet/AddCash";
 
 const AddCashPage = () => {
   return <AddCash />;
