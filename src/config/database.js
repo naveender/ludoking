@@ -1,8 +1,9 @@
 const { Sequelize } = require("sequelize");
 
 // Create Sequelize instance
-const sequelize = new Sequelize("khelbro", "root", "", {
-  host: "localhost",
+const sequelize = new Sequelize("khelbro", "root", "ludoking", {
+  host: "212.38.94.44",
+  port: 3306,
   dialect: "mysql",
   dialectModule: require("mysql2"),
   logging: false, // set true to see SQL logs
