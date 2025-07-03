@@ -2,10 +2,12 @@ import React from "react";
 import LeftSideLayout from "../common/LeftSideLayout";
 import RightSideLayout from "../common/RightSideLayout";
 
+
 const HomePage = () => {
+  
   return (
     <>
-      <LeftSideLayout>
+      <LeftSideLayout >
         <div className="px-6 py-4 border-b border-gray-200">
           <div className="flex items-center space-x-2 text-gray-600 font-semibold text-xs mb-1 select-none">
             <i className="fab fa-youtube text-red-600 text-[10px]"></i>
